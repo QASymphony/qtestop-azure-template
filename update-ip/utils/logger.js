@@ -22,7 +22,7 @@ exports.logger = winston.createLogger({
     }),
     new winston.transports.File({
       format: logFormat,
-      filename: 'app.log',
+      filename:  (__dirname + '/../app.log'),
       level: 'info'
     })
   ]
