@@ -17,13 +17,14 @@ The VM is allocated with a new public ip address
 The application is inaccessible due to the IP address in qtest.config file is different with the actual public IP address of the VM
 
 ## Solution
-Update the public IP address of the VM in qtest.config file in the first time the VM is up and running
+Build a lightweight NodeJS application to update the VM's public IP address of application' URLs in qtest.config file and in the database. This application should be run once in the first time the VM is up and running.
 
 ## How
 Try to obtain the public IP address of the VM by sending request to outside web services, e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database
 
 ## Notes
-Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS
-This is to avoid potential collision with other qTest applications being built on NodeJS (Launch, Sessions, Parameters, Pulse)
-This application will be injected in qtestctl script, which runs on system start up to start all qTest application. 
-However, it performs its job one time only in the first time the VM is up and running, just to avoid updating the IP address that the user interntionally put into the application
+Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with deferent version of NodeJS (Launch, Sessions, Parameters, Pulse).
+
+This application will be injected in qtestctl (bash-) script located in qtestctl directory. This script runs on system start up to start all qTest applications.
+
+This applicatio performs its job one time only when the VM is first up and running just to make sure the user can access to qTest the first time with everything properly pre-configured. Later on, the user might choose to use domain URL instead of public (or even private IP address) and so no need to perform IP Address look up and update later on.
