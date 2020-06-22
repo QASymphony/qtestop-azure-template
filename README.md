@@ -20,7 +20,7 @@ The application is inaccessible due to the IP address in qtest.config file is di
 Update application' URLs with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
-Try to obtain the public IP address of the VM by either executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux) or sending request to outside web services (Windows), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database
+Obtain the public IP address of the VM by executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux deployment) or sending HTTP request to outside web services (Windows), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database
 
 ## Notes
 Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with deferent version of NodeJS (Launch, Sessions, Parameters, Pulse).
