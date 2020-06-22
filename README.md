@@ -17,10 +17,10 @@ The VM is allocated with a new public ip address
 The application is inaccessible due to the IP address in qtest.config file is different with the actual public IP address of the VM
 
 ## Solution
-Build a lightweight NodeJS application to update the VM's public IP address of application' URLs in qtest.config file and in the database. This application should be run once in the first time the VM is up and running.
+Update application' URLs with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
-Try to obtain the public IP address of the VM by sending request to outside web services, e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database
+Try to obtain the public IP address of the VM by either executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux) or sending request to outside web services (Windows), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database
 
 ## Notes
 Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with deferent version of NodeJS (Launch, Sessions, Parameters, Pulse).
