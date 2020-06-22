@@ -1,19 +1,19 @@
 # qTest OnPremise Azure Template
 
-## Given:
+## Given
 All qTest applications and its dependency components (PostgreSQL, ElasticSearch) are pre-installed on a Linux server with a pre-configured public IP address and Server URL.
 These configurations are stored in qtest.config file
 
-## When:
+## When
 The server is turned into an Image, the configuration in qtest.config file is also persisted in the image, along with the OS and all other application configurartions
 
-## Then:
+### And
 The Image is used to spin up a new Virtual Machine (or server instance)
 
-## Then:
+### And
 The VM is allocated with a new public ip address
 
-## Then:
+## Then
 The application is inaccessible due to the IP address in qtest.config file is different with the actual public IP address of the VM
 
 ## Solution:
