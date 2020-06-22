@@ -19,7 +19,7 @@ const replaceIPAddress = (content, oldIP, newIP) => {
      */
     const ipAddressToBeReplaced = config.ip_address_to_be_replaced.trim();
     if (ipAddress == ipAddressToBeReplaced) {
-      logger.info(`IP address to be replaced is the same with the current public IP address. Exit now.`);
+      logger.info(`IP address to be replaced is the same with the current public IP address.`);
       return;
     }
 
@@ -92,10 +92,11 @@ const replaceIPAddress = (content, oldIP, newIP) => {
       throw e;
     } finally {
       client.release();
-      logger.info(`Update IP address finished.`);
     }
   } catch (e) {
     console.log(e);
     logger.error(e);
+  } finally {
+    logger.info(`Update IP address finished.`);
   }
 })();

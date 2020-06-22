@@ -1,12 +1,13 @@
 {
   "name": "update-ip",
   "version": "1.0.0",
-  "description": "",
+  "description": "Update IP Address of qTest applications URLs when the application is started in the first time in a new Virtual Machine",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "author": "",
+  "author": "Huy Nguyen",
   "license": "ISC",
   "dependencies": {
     "pg": "^8.2.1",
