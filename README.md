@@ -20,11 +20,11 @@ The application is inaccessible due to the IP address in qtest.config file is di
 Update application' URLs with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
-Obtain the public IP address of the VM by executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux deployment) or sending HTTP request to outside web services (Windows), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database
+In the first application start up, try to obtain the public IP address of the VM by executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux deployment) or sending HTTP request to outside web services (Windows), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database.
 
 ## Notes
-Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with deferent version of NodeJS (Launch, Sessions, Parameters, Pulse).
+Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with different version of NodeJS (Launch, Sessions, Parameters, Pulse).
 
-This application will be injected in qtestctl (bash-) script located in qtestctl directory. This script runs on system start up to start all qTest applications.
+This application will be injected in qtestctl (bash-) script located in qtestctl directory, which is always run on system start up to start all qTest applications.
 
-This applicatio performs its job one time only when the VM is first up and running just to make sure the user can access to qTest the first time with everything properly pre-configured. Later on, the user might choose to use domain URL instead of public (or even private IP address) and so no need to perform IP Address look up and update later on.
+This application performs its job one time only when the VM is first up and running just to make sure the user can access to qTest in the first time with everything properly pre-configured. Later on, the user might choose to use domain URL instead of public (or even private IP address) and so no need to perform IP Address look up and update afterward.
