@@ -10,6 +10,7 @@ const replaceIPAddress = (content, oldIP, newIP) => {
 
 (async () => {
   try {
+    logger.info(`Update IP address started.`);
     const ipAddress = await getPublicIP();
     logger.info(`Public IP address: ${ipAddress}`);
    
@@ -91,6 +92,7 @@ const replaceIPAddress = (content, oldIP, newIP) => {
       throw e;
     } finally {
       client.release();
+      logger.info(`Update IP address finished.`);
     }
   } catch (e) {
     console.log(e);

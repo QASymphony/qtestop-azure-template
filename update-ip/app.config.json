@@ -1,5 +1,5 @@
 {
-	"ip_address_to_be_replaced": "52.152.141.79",
+	"ip_address_to_be_replaced": "70.225.0.66",
 	"env": {
 		"name": "dev",
 		"prod": {
