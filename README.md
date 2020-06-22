@@ -28,3 +28,7 @@ Portalble NodeJS is used as the run time for this application. Using portable No
 This application will be injected in qtestctl (bash-) script located in qtestctl directory, which is always run on system start up to start all qTest applications.
 
 This application performs its job one time only when the VM is first up and running just to make sure the user can access to qTest in the first time with everything properly pre-configured. Later on, the user might choose to use domain URL instead of public (or even private IP address) and so no need to perform IP Address look up and update afterward.
+
+## How To Integrate This Code to qtestctl
+
+TBD.
