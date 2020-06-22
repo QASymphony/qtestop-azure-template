@@ -25,8 +25,13 @@ const replaceIPAddress = (content, oldIP, newIP) => {
     const envConfig = config.env[config.env.name];
     const qtestConfigFilePath = envConfig.qtest_config_file_path;
     const content = fs.readFileSync(qtestConfigFilePath, { encoding: 'utf8', flag: 'r' });
-    const newContent = replaceIPAddress(content, `//${ipAddressToBeReplaced}`, `//${ipAddress}`);
-    fs.writeFileSync(qtestConfigFilePath, newContent, { encoding: 'utf8' });
+    if (content.indexOf(ipAddressToBeReplaced) > 0) {
+      const newContent = replaceIPAddress(content, `//${ipAddressToBeReplaced}`, `//${ipAddress}`);
+      fs.writeFileSync(qtestConfigFilePath, newContent, { encoding: 'utf8' });
+      logger.info(`Successfully replaced IP Address in ${qtestConfigFilePath}`);  
+    } else {
+      logger.info(`Not found IP Address ${ipAddressToBeReplaced} to be replaced in ${qtestConfigFilePath}`);  
+    }
 
     /**
      * update ip address in qtest database
