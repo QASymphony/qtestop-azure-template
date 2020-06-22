@@ -1,4 +1,5 @@
 const winston = require('winston');
+require('winston-daily-rotate-file');
 const { combine, timestamp, colorize } = winston.format;
 
 const transformer = {
@@ -20,10 +21,14 @@ exports.logger = winston.createLogger({
       level: 'info',
       handleExceptions: true
     }),
-    new winston.transports.File({
+    new winston.transports.DailyRotateFile({
       format: logFormat,
-      filename:  (__dirname + '/../app.log'),
-      level: 'info'
+      level: 'info',
+      filename: (__dirname + '/../logs/'+ 'update-ip-%DATE%.log'),
+      datePattern: 'YYYY-MM-DD',
+      zippedArchive: true,
+      maxSize: '20m',
+      maxFiles: '14d'
     })
   ]
 });
