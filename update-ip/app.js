@@ -1,10 +1,5 @@
 'use strict';
 const config = require('./app.config.json');
-// this code is supposed to be executed once if successful
-if (config.executed) {
-  return;
-}
-
 const fs = require('fs');
 const { getPublicIP } = require('./utils/get-ip');
 const { logger } = require('./utils/logger');
