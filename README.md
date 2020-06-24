@@ -47,7 +47,7 @@ Navigate to /home/ directory
 ```$ cd /home```
 
 Download this application from this repo to /home/ directory
-```$ wget https://github.com/QASymphony/qtestop-azure-template/raw/master/releases/qtest-azure-bootstraper-1.0.zip```
+```$ wget https://github.com/QASymphony/qtestop-azure-template/raw/master/releases/qtest-azure-bootstrapper-1.0.zip```
 
 Create a folder for this application
 ```$ mkdir /home/qtest-azure-bootstrapper-1.0```
