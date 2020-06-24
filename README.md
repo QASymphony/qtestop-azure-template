@@ -72,7 +72,7 @@ Scroll to the bottom to locate this line `if [ "$APP_START" = true ] ; then`, th
 
 The file will look like below
 
-![Injetct qtest-azure-bootstraper to qtestctl script](/docs/injecttion.png)
+![Injetct qtest-azure-bootstraper to qtestctl script](/qtest-azure-bootstrapper/docs/injecttion.png)
 
 As you can guess, that line will execute the nodejs application naming `app.js` located at `/home/qtest-azure-bootstraper-1.0/app.js`
 
