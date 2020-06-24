@@ -73,7 +73,7 @@ The `app.config.json` will now looks like below. Note the `ip_address_to_be_repl
 Open the `qtestctl` file (without extension) located at qtest installation folder in a text editor, e.g. nano
 ```$nano /home/qtestctl/qtestctl```
 
-Scroll to the bottom to locate this line `if [ "$APP_START" = true ] ; then`, then add this line right after it, like below:
+Scroll to the bottom to locate this line `if [ "$APP_START" = true ] ; then`, then add this line right after it, like so:
 ```/home/qtest-azure-bootstraper-1.0/nodejs/bin/node /home/qtest-azure-bootstraper-1.0/app.js```
 
 The file will look like below
