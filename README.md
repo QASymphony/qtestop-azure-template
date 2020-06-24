@@ -67,8 +67,12 @@ Save.
 Open the `qtestctl` file (without extension) located at qtest installation folder in a text editor, e.g. nano
 ```$nano /home/qtestctl/qtestctl```
 
-Scroll to the bottom to locate this line `if [ "$APP_START" = true ] ; then`, then add this line right after it, like so:
+Scroll to the bottom to locate this line `if [ "$APP_START" = true ] ; then`, then add this line right after it, like below:
 ```/home/qtest-azure-bootstraper-1.0/nodejs/bin/node /home/qtest-azure-bootstraper-1.0/app.js```
+
+The file will look like below
+
+![Injetct qtest-azure-bootstraper to qtestctl script](/docs/injecttion.png)
 
 As you can guess, that line will execute the nodejs application naming `app.js` located at `/home/qtest-azure-bootstraper-1.0/app.js`
 
