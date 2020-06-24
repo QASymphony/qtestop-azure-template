@@ -25,9 +25,7 @@ During qTest application start up, the *qtestctl* (bash-) script (located at qte
 ## Notes
 Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with different version of NodeJS (Launch, Sessions, Parameters, Pulse).
 
-This application will be injected in qtestctl (bash-) script located in qtestctl directory, which is always run on system start up to start all qTest applications. The instruction will be detailed next.
-
-This application performs its job one time only when the VM is first up and running just to ensure the user can access to qTest in the first time with everything properly pre-configured. Later on, the user might choose to use domain URL instead of public (or even private IP address) and so no need to perform IP Address look up and update afterward.
+This application performs its job when it detects the VM's public IP address is different with the one being used for applications' URLs in *qtest.config* file (and in database too) at the time the VM is up and running just to ensure the user can access to qTest in the first time with everything properly pre-configured.
 
 ## How To Integrate This Code to qtestctl during Azure Image building process
 
