@@ -3,7 +3,7 @@
 ## Given
 All qTest applications and its dependency components (PostgreSQL, ElasticSearch) are pre-installed on a Linux server with a pre-configured public IP address and Server URL.
 
-These configurations are stored in *qtest.config* file
+These configurations are stored in *qtest.config* file and in database.
 
 ## When
 The server is turned into an Image, the configuration in *qtest.config* file is also persisted in the image, along with the OS, the application configurartions and the database itself
