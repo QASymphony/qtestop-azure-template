@@ -53,7 +53,7 @@ Create a folder for this application
 ```$ mkdir /home/qtest-azure-bootstrapper-1.0```
 
 Unzip the applcation to the newly created directory
-```$ unzip /home/qtest-azure-bootstraper-1.0 qtest-azure-bootstraper-1.0.zip```
+```$ unzip -d /home/qtest-azure-bootstraper-1.0 qtest-azure-bootstraper-1.0.zip```
 
 Open `/home/qtest-azure-bootstraper-1.0/app.config.json` in a text editor, e.g. nano
 ```$nano /home/qtest-azure-bootstraper-1.0/app.config.json```
