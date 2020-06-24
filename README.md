@@ -62,7 +62,13 @@ Change the value `env.name` to `prod`.
 
 If you're not installing qTest in `/home/qtestctl`, change the value of `env.prod.qtest_config_file_path` to reflect the full path to `qtest.config` file.
 
+Update the database connection info to reflect your actual database configuration, e.g. database user and password.
+
 Save.
+
+The `app.config.json` will now looks like below. Note the `ip_address_to_be_replaced` will be different in your environment.
+
+![app.config.json](/qtest-azure-bootstrapper/docs/app.config.json.png)
 
 Open the `qtestctl` file (without extension) located at qtest installation folder in a text editor, e.g. nano
 ```$nano /home/qtestctl/qtestctl```
