@@ -26,7 +26,7 @@ exports.logger = winston.createLogger({
     new winston.transports.DailyRotateFile({
       format: logFormat,
       level: 'info',
-      filename: (__dirname + '/../logs/'+ 'update-ip-%DATE%.log'),
+      filename: (__dirname + '/../logs/'+ `${package.name}-%DATE%.log`),
       datePattern: 'YYYY-MM-DD',
       zippedArchive: true,
       maxSize: '20m',
