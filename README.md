@@ -2,6 +2,7 @@
 
 ## Given
 All qTest applications and its dependency components (PostgreSQL, ElasticSearch) are pre-installed on a Linux server with a pre-configured public IP address and Server URL.
+
 These configurations are stored in *qtest.config* file
 
 ## When
@@ -31,6 +32,7 @@ This application performs its job when it detects the VM's public IP address is 
 
 ### Pre-requitesite
 Azure Linux VM built with CentOS image version 7.x
+
 All qTest applicatons have been installed and configured properly, including configuring applications' URLs in qTest Configuration page and verified they are accessible.
 
 ### Steps
