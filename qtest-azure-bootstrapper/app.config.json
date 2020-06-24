@@ -1,0 +1,26 @@
+{
+	"ip_address_to_be_replaced": "70.225.0.66",
+	"env": {
+		"name": "dev",
+		"prod": {
+			"qtest_config_file_path": "/home/qtestctl/qtest.config",
+			"database": {
+				"host": "127.0.0.1",
+				"port": 5432,
+				"name": "qtest",
+				"user": "postgres",
+				"password": "postgres"
+			}
+		},
+		"dev": {
+			"qtest_config_file_path": "./test/qtest.config",
+			"database": {
+				"host": "52.152.141.79",
+				"port": 5432,
+				"name": "qtest",
+				"user": "postgres",
+				"password": "postgres"
+			}
+		}
+	}
+}

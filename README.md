@@ -1,4 +1,4 @@
-# qTest OnPremise Azure Template
+# qTest OnPremise Azure Bootstrapper
 
 ## Given
 All qTest applications and its dependency components (PostgreSQL, ElasticSearch) are pre-installed on a Linux server with a pre-configured public IP address and Server URL.
@@ -14,13 +14,13 @@ The Image is used to spin up a new Virtual Machine (or server instance)
 The VM is allocated with a new public ip address
 
 ## Then
-The application is inaccessible due to the IP address in qtest.config file is different with the actual public IP address of the VM
+The qTest application is inaccessible due to the IP address in qtest.config file is different with the actual public IP address of the VM
 
 ## Solution
-Update application' URLs with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
+Build a lightweight application naming qtest-azure-bootstapper to update qTest application' URLs (plural) with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
-In the first application start up, try to obtain the public IP address of the VM by executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux deployment) or sending HTTP request to outside web services (extension point for cross platform deployment), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database.
+In the first qTest application start up, azure-bootstapper tries to obtain the public IP address of the VM by executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux deployment) or sending HTTP request to outside web services (extension point for cross platform deployment), e.g. http://httpbin.org, https://www.ipify.org/. When succesful, update qtest.config file with the new public IP address and the application URLs in qTest database.
 
 ## Notes
 Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with different version of NodeJS (Launch, Sessions, Parameters, Pulse).
@@ -29,6 +29,32 @@ This application will be injected in qtestctl (bash-) script located in qtestctl
 
 This application performs its job one time only when the VM is first up and running just to make sure the user can access to qTest in the first time with everything properly pre-configured. Later on, the user might choose to use domain URL instead of public (or even private IP address) and so no need to perform IP Address look up and update afterward.
 
-## How To Integrate This Code to qtestctl
+## How To Integrate This Code to qtestctl during Azure Image building process
 
-TBD.
+### Pre-requitesite
+Azure Linux VM built with CentOS 7.x image
+All qTest applicatons has been installed and properly configured, including configuring applications' URLs in qTest Configuration page and verified they are accessible
+
+### Steps
+Assuming qTest is installed in the VM at /home/qtestctl/ directory
+SSH to Azure VM
+Execute this command to switch root user: ```$ sudo du```
+Navigate to /home/ directory ```$ cd /home```
+Download this application from this repo to /home/ directory ```$ wget https://github.com/QASymphony/qtestop-azure-template/raw/master/releases/qtest-azure-bootstraper-1.0.zip```
+Create a folder for this application ```$ mkdir /home/qtest-azure-bootstrapper-1.0```
+Unzip the applcation to the newly created directory
+```$ unzip /home/qtest-azure-bootstraper-1.0 qtest-azure-bootstraper-1.0.zip```
+Open `/home/qtest-azure-bootstraper-1.0/app.config.json` in a text editor, e.g. nano
+```$nano /home/qtest-azure-bootstraper-1.0/app.config.json```
+Change the value of the field `ip_address_to_be_replaced` to the actual Public IP Address of the VM (you can always find this in Azure Portal)
+Change the value `env.name` to `prod`.
+If you're not installing qTest in /home/qtestctl, change the value of env.prod.qtest_config_file_path to reflect the full path to qtest.config file.
+Save.
+Open the qtestctl file (without extension) located at qtest installation folder in a tet editor, e.g. nano
+```$nano /home/qtestctl/qtestctl```
+Scroll to the bottom to locate this line ``if [ "$APP_START" = true ] ; then``, then add this line right after it, like so:
+```/home/qtest-azure-bootstraper-1.0/nodejs/bin/node /home/qtest-azure-bootstraper-1.0/app.js```
+As you can guess, that line will execute the nodejs application naming ``app.js`` located at ``/home/qtest-azure-bootstraper-1.0/app.js``
+Save and close the editor.
+Last step is to install qTest as a service on the VM so qtestctl script will get executed in every server startup
+```[/home/qtestctl]$ ./install```

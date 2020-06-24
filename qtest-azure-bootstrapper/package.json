@@ -1,0 +1,17 @@
+{
+  "name": "qtest-azure-bootstrapper",
+  "version": "1.0.0",
+  "description": "Bootstrapper qTest applications when the application is started the first time in a new Azure Virtual Machine",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Huy Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.2.1",
+    "winston": "^3.3.0",
+    "winston-daily-rotate-file": "^4.5.0"
+  }
+}

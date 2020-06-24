@@ -1,0 +1,258 @@
+ctl {
+  version = "10.1.0"
+}
+
+// list of applications
+apps = ['manager', 'sessions', 'tdm', 'insights', 'launch', 'pulse', 'scenario']
+
+/* external tool configurations. these are used as shared configurations to construct applications below. */
+external {
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db {
+      qtest = "qtest"
+      sessions = "sessions"
+      tdm = "parameters"
+      pulse = "pulse"
+    }
+    ssl {
+      enabled = false
+      cert = "root.crt"
+    }
+  }
+
+  elasticsearch {
+    host = "127.0.0.1"
+    port = 9200
+    scheme = "http"
+  }
+}
+
+/* common configurations */
+common {
+  ssl {
+    enabled = false
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = false
+  }
+}
+
+/* application configurations */
+manager {
+  port = 8080
+  data = "/home/manager/data"
+  logs = "/home/manager/logs"
+  url = "http://52.152.141.79:8080"
+  security {
+    enabled = false
+    whitelist = ""
+  }
+  ssl {
+    enabled = common.ssl.enabled
+    port = 8443
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+  }
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db = "qtest"
+  }
+}
+
+tdm {
+  port = 5080
+  ssl {
+    enabled = common.ssl.enabled
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+  }
+  qtest {
+    host = "http://52.152.141.79:8080"
+  }
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db = "parameters"
+  }
+}
+insights {
+  //HTTP Port of qTest Insights
+  httpport = 8081
+  //Admin Port of qTest Insights
+  adminport = 8007
+  resourceslocation = "Function.AppPhysicalPath"
+
+  ssl {
+    enabled = common.ssl.enabled
+    port = 8444
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+  }
+
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db = "qtest"
+  }
+
+  etl {
+    //default period of time etl run to update project module and test cycle, default is 10
+    enabled = true
+    cylcleupdateinterval = 10
+    projectmoduleupdateinterval = 10
+    chartcolorupdateinterval = 10
+    autorefreshdblink = true
+  }
+
+  security {
+    enabled = false
+    whitelist = ""
+  }
+
+  clientName = ""
+}
+
+sessions {
+  port = 9080
+
+  ssl {
+    enabled = common.ssl.enabled
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+  }
+
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db = "sessions"
+  }
+
+  qtest {
+    host = "http://52.152.141.79:8080"
+    mastertoken = "QToy"
+  }
+
+  storage {
+    type = "disk_storage"
+    rootpath = "/home/sessions/resources"
+    accesskey = ""
+    secretkey = ""
+    bucketname = "qtest-explorer-api"
+  }
+  security {
+    enabled = false
+    whitelist = ""
+  }
+  /*  Add response headers to browser, response_headers is optional property */
+  /*
+  response_headers = [
+    [
+      name: "Content-Security-Policy",
+      value: "default-src * 'unsafe-eval' 'unsafe-inline'; font-src * data:; img-src * data: blob:; object-src *"
+    ]
+  ]
+  */
+}
+pulse {
+  port = 4080
+  url = "http://52.152.141.79:4080"
+  log = "/home/pulse/logs/pulse.log"
+  ssl {
+    enabled = common.ssl.enabled
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+    disableTLSv1_1 = false
+  }
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db = "pulse"
+    ssl {
+      enabled = external.postgres.ssl.enabled
+      cert = "root.crt"
+    }
+  }
+}
+
+launch {
+  port = 3080
+  url = "http://52.152.141.79:3080"
+  ssl {
+    enabled = common.ssl.enabled
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+  }
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    db = "qtest"
+  }
+}
+scenario {
+  port = 6080
+  url = "http://52.152.141.79:6080"
+  ssl {
+    enabled = common.ssl.enabled
+    cert = "/home/qtestctl/ssl/server.crt"
+    key = "/home/qtestctl/ssl/server.key"
+    pass = "lNXatVmcw52btQ3clRXc"
+    strict = common.ssl.strict
+  }
+  postgres {
+    host = "127.0.0.1"
+    port = 5432
+    auth {
+      user = "postgres"
+      pass = "MXZydGdz9Gc"
+    }
+    ssl {
+      enabled = external.postgres.ssl.enabled
+      cert = "root.crt"
+    }
+    db = "pulse"
+  }
+}
