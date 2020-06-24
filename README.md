@@ -17,7 +17,7 @@ The VM is allocated with a different public ip address
 The qTest application is inaccessible due to the IP address in qtest.config file is different with the actual public IP address of the VM
 
 ## Solution
-Build a lightweight application naming **qtest-azure-bootstapper** to update qTest application' URLs (plural) with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
+Build a lightweight application naming **qtest-azure-bootstapper** to update qTest applications' URLs (plural) with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
 During qTest application start up, the *qtestctl* (bash-) script (located at qtest installation directory) is executed by the system via command `./qtestctl start`, we will inject **qtest-azure-bootstapper** for it to obtain the public IP address of the VM (technically, via executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (on Linux), or sending HTTP request to outside web services (on Windows), e.g. http://httpbin.org, https://www.ipify.org/). When succesful, **qtest-azure-bootstapper** update the application URLs in *qtest.config* file and in qTest database.
