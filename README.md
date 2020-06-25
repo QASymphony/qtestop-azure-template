@@ -28,7 +28,7 @@ Portalble NodeJS is used as the run time for this application. Using portable No
 
 This application performs its job when it detects the VM's public IP address is different with the one being used for applications' URLs in *qtest.config* file (and in database too) at the time the VM is up and running just to ensure the user can access to qTest in the first time with everything properly pre-configured.
 
-## How To Integrate This Code to qtestctl during Azure Image building process
+## How To Integrate This Code to qtestctl
 
 ### Pre-requitesite
 Azure Linux VM built with CentOS image version 7.x
