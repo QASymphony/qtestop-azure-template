@@ -86,5 +86,7 @@ As you can guess, that line will execute the nodejs application naming `app.js` 
 
 Save and Close the editor.
 
-Last step is to install qTest as a service on the VM so qtestctl script will get executed in every server startup.
+Next step is to install qTest as a service on the VM so qtestctl script will get executed in every server startup.
 ```[/home/qtestctl]$ ./install```
+
+Now we can go ahead building the Image from the VM.
