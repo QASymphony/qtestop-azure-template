@@ -57,7 +57,7 @@ const replaceIPAddress = (content, oldIP, newIP) => {
         if (currentUrl.indexOf(ipAddressToBeReplaced) > 0) {
           // found insights url, replace the ip address in the url with new ip
           let newUrl = replaceIPAddress(currentUrl, ipAddressToBeReplaced, ipAddress);
-          await client.query('UPDATE client_ext SET opinsighturl = $1 WHERE id = 2', [`${newUrl}`]);
+          await client.query('UPDATE client_ext SET opinsighturl = $1 WHERE id = $2', [`${newUrl}`, insightUrlId]);
           logger.info(`Successfully replaced Insights URL. New URL: ${newUrl}`);
         } else {
           logger.info(`Insights URL does not include IP address to be replaced. Current URL is ${currentUrl}`);
