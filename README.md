@@ -21,14 +21,14 @@ The qTest application is inaccessible due to the IP address in qtest.config file
 Build a lightweight application naming **qtest-azure-bootstapper** to update qTest applications' URLs (plural) with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
-During qTest application start up, the *qtestctl* (bash-) script (located at qtest installation directory) is executed by the system via command `./qtestctl start`, we will inject **qtest-azure-bootstapper** for it to obtain the public IP address of the VM (technically, via executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (on Linux), or sending HTTP request to outside web services (on Windows), e.g. http://httpbin.org, https://www.ipify.org/). When succesful, **qtest-azure-bootstapper** update the application URLs in *qtest.config* file and in qTest database.
+During qTest application start up, the *qtestctl* (bash-) script (located at qtest installation directory) is executed by the system via command `./qtestctl start`, we will inject **qtest-azure-bootstapper** for it to obtain the public IP address of the VM (technically, via executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux only), or sending HTTP request to outside web services, e.g. https://checkip.amazonaws.com, https://api.ipify.org). When succesful, **qtest-azure-bootstapper** update the application URLs in *qtest.config* file and in qTest database.
 
 ## Notes
 Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with different version of NodeJS (Launch, Sessions, Parameters, Pulse).
 
 This application performs its job when it detects the VM's public IP address is different with the one being used for applications' URLs in *qtest.config* file (and in database too) at the time the VM is up and running just to ensure the user can access to qTest in the first time with everything properly pre-configured.
 
-## How To Integrate This Code to qtestctl during Azure Image building process
+## How To Integrate This Code to qtestctl
 
 ### Pre-requitesite
 Azure Linux VM built with CentOS image version 7.x
@@ -86,5 +86,7 @@ As you can guess, that line will execute the nodejs application naming `app.js` 
 
 Save and Close the editor.
 
-Last step is to install qTest as a service on the VM so qtestctl script will get executed in every server startup.
+Next step is to install qTest as a service on the VM so qtestctl script will get executed in every server startup.
 ```[/home/qtestctl]$ ./install```
+
+Now we can go ahead building the Image from the VM.
