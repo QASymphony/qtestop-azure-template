@@ -10,8 +10,7 @@ exports.getPublicIP = async () => {
       }
     }
     else {
-      const http = require('http');
-      const req = http.get('http://api.ipify.org', (res) => {
+      const req = require('https').get('https://checkip.amazonaws.com', (res) => {
         if (res.statusCode < 200 || res.statusCode >= 300) {
           return reject(new Error(`status code: ${res.statusCode}`));
         }
