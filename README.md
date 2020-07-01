@@ -21,7 +21,12 @@ The qTest application is inaccessible due to the IP address in qtest.config file
 Build a lightweight application naming **qtest-azure-bootstapper** to update qTest applications' URLs (plural) with the VM's public IP address in qtest.config file and in the database to ensure the user can access to qTest and all other applications the first time they spin up the VM from this image.
 
 ## How
-During qTest application start up, the *qtestctl* (bash-) script (located at qtest installation directory) is executed by the system via command `./qtestctl start`, we will inject **qtest-azure-bootstapper** for it to obtain the public IP address of the VM (technically, via executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux only), or sending HTTP request to outside web services, e.g. https://checkip.amazonaws.com, https://api.ipify.org). When succesful, **qtest-azure-bootstapper** update the application URLs in *qtest.config* file and in qTest database.
+During qTest application start up, the *qtestctl* (bash-) script (located at qtest installation directory) is executed by the system via command `./qtestctl start`, we will inject **qtest-azure-bootstapper** for it to obtain the public IP address of the VM via
+
+- executing the command ```dig +short myip.opendns.com @resolver1.opendns.com``` (Linux deployment), or 
+- sending HTTP request to outside web services, e.g. https://checkip.amazonaws.com, https://api.ipify.org (Windows deployment)
+
+When succesful, **qtest-azure-bootstapper** update the application URLs both in *qtest.config* file and qTest database.
 
 ## Notes
 Portalble NodeJS is used as the run time for this application. Using portable NodeJS eliminates the need to install NodeJS into the OS. This is also to avoid potential collision with other qTest applications being built with different version of NodeJS (Launch, Sessions, Parameters, Pulse).
